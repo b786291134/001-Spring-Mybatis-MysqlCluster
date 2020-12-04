@@ -1,0 +1,6 @@
+com\bjpowernode\test\Test.class
+com\bjpowernode\bean\User.class
+com\bjpowernode\service\serviceimpl\SqlServiceImpl.class
+com\bjpowernode\master\MasterUserMapper.class
+com\bjpowernode\slave\SlaveUserMapper.class
+com\bjpowernode\service\SqlService.class

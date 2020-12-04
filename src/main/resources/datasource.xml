@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--主服务器-->
+    <bean name="masterDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.59.129:3307/test"/>
+        <property name="username" value="root"/>
+        <property name="password" value="y4j2c2b7"/>
+    </bean>
+    <bean name="masterSqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="masterDataSource"/>
+    </bean>
+    <bean name="masterMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="masterSqlSessionFactoryBean"/>
+        <property name="basePackage" value="com.bjpowernode.master"/>
+    </bean>
+    <!--从服务器-->
+    <bean name="slaveDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.59.129:3310/test"/>
+        <property name="username" value="root"/>
+        <property name="password" value="y4j2c2b7"/>
+    </bean>
+    <bean name="slaveSqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="slaveDataSource"/>
+    </bean>
+    <bean name="slaveMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="slaveSqlSessionFactoryBean"/>
+        <property name="basePackage" value="com.bjpowernode.slave"/>
+    </bean>
+</beans>
